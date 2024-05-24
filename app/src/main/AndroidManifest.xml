@@ -17,7 +17,7 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".PracticalTest02"
+            android:name="ro.pub.cs.systems.eim.practicaltest02v10.PracticalTest02MainActivityv10"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

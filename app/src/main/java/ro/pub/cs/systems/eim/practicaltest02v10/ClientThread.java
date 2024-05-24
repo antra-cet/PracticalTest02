@@ -1,4 +1,4 @@
-package ro.pub.cs.systems.eim.practicaltest02;
+package ro.pub.cs.systems.eim.practicaltest02v10;
 
 import android.util.Log;
 import android.widget.TextView;
@@ -8,25 +8,20 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-import ro.pub.cs.systems.eim.practicaltest02.Constants;
-import ro.pub.cs.systems.eim.practicaltest02.Utilities;
-
 public class ClientThread extends Thread {
 
     private final String address;
     private final int port;
-    private final String city;
-    private final String informationType;
-    private final TextView weatherForecastTextView;
+    private final String pokemonName;
+    private final TextView pokemonResultTextView;
 
     private Socket socket;
 
-    public ClientThread(String address, int port, String city, String informationType, TextView weatherForecastTextView) {
+    public ClientThread(String address, int port, String pokemon, TextView pokemonResultTextView) {
         this.address = address;
         this.port = port;
-        this.city = city;
-        this.informationType = informationType;
-        this.weatherForecastTextView = weatherForecastTextView;
+        this.pokemonName = pokemon;
+        this.pokemonResultTextView = pokemonResultTextView;
     }
 
     @Override
@@ -35,14 +30,12 @@ public class ClientThread extends Thread {
             socket = new Socket(address, port);
             BufferedReader bufferedReader = Utilities.getReader(socket);
             PrintWriter printWriter = Utilities.getWriter(socket);
-            printWriter.println(city);
+            printWriter.println(pokemonName);
             printWriter.flush();
-            printWriter.println(informationType);
-            printWriter.flush();
-            String weatherInformation;
-            while ((weatherInformation = bufferedReader.readLine()) != null) {
-                final String finalizedWeatherInformation = weatherInformation;
-                weatherForecastTextView.post(() -> weatherForecastTextView.setText(finalizedWeatherInformation));
+            String pokemonInformation;
+            while ((pokemonInformation = bufferedReader.readLine()) != null) {
+                final String finalizedPokemonInformation = pokemonInformation;
+                pokemonResultTextView.post(() -> pokemonResultTextView.setText(finalizedPokemonInformation));
             }
         } catch (IOException ioException) {
             Log.e(Constants.TAG, "[CLIENT THREAD] An exception has occurred: " + ioException.getMessage());

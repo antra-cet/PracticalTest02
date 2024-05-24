@@ -1,4 +1,4 @@
-package ro.pub.cs.systems.eim.practicaltest02;
+package ro.pub.cs.systems.eim.practicaltest02v10;
 
 import android.util.Log;
 
@@ -7,14 +7,11 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.HashMap;
 
-import ro.pub.cs.systems.eim.practicaltest02.Constants;
-import ro.pub.cs.systems.eim.practicaltest02.WeatherForecastInformation;
-
 public class ServerThread extends Thread {
 
     private ServerSocket serverSocket = null;
 
-    private final HashMap<String, WeatherForecastInformation> data;
+    private final HashMap<String, PokemonInformation> data;
 
     public ServerThread(int port) {
         try {
@@ -29,11 +26,11 @@ public class ServerThread extends Thread {
         return serverSocket;
     }
 
-    public synchronized void setData(String city, WeatherForecastInformation weatherForecastInformation) {
-        this.data.put(city, weatherForecastInformation);
+    public synchronized void setData(String pokemonName, PokemonInformation pokemonInformation) {
+        this.data.put(pokemonName, pokemonInformation);
     }
 
-    public synchronized HashMap<String, WeatherForecastInformation> getData() {
+    public synchronized HashMap<String, PokemonInformation> getData() {
         return data;
     }
 

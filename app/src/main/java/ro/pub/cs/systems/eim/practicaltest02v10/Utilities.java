@@ -1,4 +1,4 @@
-package ro.pub.cs.systems.eim.practicaltest02;
+package ro.pub.cs.systems.eim.practicaltest02v10;
 
 import java.io.BufferedReader;
 import java.io.IOException;
